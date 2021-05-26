@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAB201_Assignment.Customer">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAIChAAIAkAAAAAAIAAAAAAAAAAAAACgAAAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="password" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CAB201_Assignment.Password">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAIAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAACIA=</HashCode>
+      <FileName>Password.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.Property">
+    <Position X="5.25" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAACAJQAAgAAgAAAAgAAAAAIAAAAAAAAAAAiAAAA=</HashCode>
+      <FileName>Property.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="owner" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CAB201_Assignment.Land">
+    <Position X="4.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.House">
+    <Position X="6.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.RealEstateCompany">
+    <Position X="8.75" Y="5.25" Width="2.25" />
+    <AssociationLine Name="LoggedInUser" Type="CAB201_Assignment.Customer">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.192" Y="0.112" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAMAAgBRICAAAARABBEAAAIAAAAAEBAAIAAARAAAAAM=</HashCode>
+      <FileName>RealEstateCompany.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mainMenu" />
+      <Field Name="functionMenu" />
+      <Field Name="LoggedInUser" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="customers" />
+      <Field Name="properties" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CAB201_Assignment.UserInterface">
+    <Position X="13.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAYgAACAAgAAAAAAAAAAAAAgAIAAAAAA=</HashCode>
+      <FileName>UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.Menu">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CAB201_Assignment.Menu.MenuItem">
+        <TypeIdentifier>
+          <NewMemberFileName>UserInterface.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

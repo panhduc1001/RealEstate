@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAB201_Assignment.Customer">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="Authenticate" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAIAEAAAAAAIAAAAAgAACAAAAAAAAAAg=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.RealEstateCompany">
+    <Position X="4.25" Y="0.5" Width="1.75" />
+    <Members>
+      <Property Name="CurrentUser" Hidden="true" />
+      <Method Name="Exit" Hidden="true" />
+      <Method Name="FilterProperties" Hidden="true" />
+      <Field Name="functionMenu" Hidden="true" />
+      <Method Name="ListBidsForProperty" Hidden="true" />
+      <Method Name="ListNewProperty" Hidden="true" />
+      <Method Name="ListUsersProperties" Hidden="true" />
+      <Property Name="LoggedIn" Hidden="true" />
+      <Method Name="LogIn" Hidden="true" />
+      <Method Name="Logout" Hidden="true" />
+      <Method Name="NewHouse" Hidden="true" />
+      <Method Name="NewLand" Hidden="true" />
+      <Method Name="PlaceBid" Hidden="true" />
+      <Method Name="PopulateMenus" Hidden="true" />
+      <Field Name="properties" Hidden="true" />
+      <Method Name="SearchProperties" Hidden="true" />
+      <Method Name="SellProperty" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAMAAgBRIKgAAARgBBAAAAIAAAAAEBAAIAAARAAAAAM=</HashCode>
+      <FileName>RealEstateCompany.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mainMenu" />
+      <Field Name="functionMenu" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="customers" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CAB201_Assignment.UserInterface">
+    <Position X="9.5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAYgAACAAgAAAAAAAAAAAAAgAIAAAAAA=</HashCode>
+      <FileName>UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAB201_Assignment.Menu">
+    <Position X="7.5" Y="1" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="CAB201_Assignment.Menu.MenuItem" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UserInterface.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
