@@ -55,7 +55,6 @@ namespace CAB201_Assignment
             functionMenu.Add("List bids received for a property", ListBidsForProperty);
             functionMenu.Add("Sell one of your properties to the highest bidder", SellProperty);
             functionMenu.Add("Logout", Logout);
-            //populate 
         }
 
         private void DisplayMenu()
@@ -72,7 +71,6 @@ namespace CAB201_Assignment
                 }
             }
         }
-
 
         // Actions - for menus
         // -- Main Menu
@@ -125,14 +123,26 @@ namespace CAB201_Assignment
         }
 
         private void Exit() { System.Environment.Exit(0); }
+
+
         // -- Actions for user logged in menu
-        private void NewLand() { properties.Add(loggedInUser.ListNewProperty(1)); }
-        private void NewHouse() { properties.Add(loggedInUser.ListNewProperty(2)); }
+        private void NewLand()
+        {
+            Property newLand = loggedInUser.ListNewProperty(1);
+            properties.Add(newLand);
+            UserInterface.Message("Successfully advertised " + newLand);
+        }
+        private void NewHouse()
+        {
+            Property newHouse = loggedInUser.ListNewProperty(2);
+            properties.Add(newHouse);
+            UserInterface.Message("Successfully advertised " + newHouse);
+        }
         private void SearchProperties()
         {
 
             int postcode = UserInterface.GetInteger("Enter postcode for search");
-            UserInterface.DisplayList($"All properties in postcode {postcode}", PropertiesInPostcode(postcode), "No properties are for sale in your chosen postcode");
+            UserInterface.DisplayList($"All properties in postcode {postcode}", Property.FilterProperties(postcode, properties), "No properties are for sale in your chosen postcode");
         }
         private void ListUsersProperties()
         {
@@ -140,11 +150,6 @@ namespace CAB201_Assignment
             UserInterface.DisplayList("All of your properties", filtered_listings, "You do not currently have any properties listed");
         }
 
-        private List<Property> PropertiesInPostcode(int postcode)
-        {
-            List<Property> filtered_listings = Property.FilterProperties(postcode, properties);
-            return filtered_listings;
-        }
         private void PlaceBid()
         {
             UserInterface.Message("Select a property to bid on");
@@ -172,10 +177,10 @@ namespace CAB201_Assignment
             // Realestate company enquires about which property the customer wishes to sell, then the property transfers its ownership 
             UserInterface.Message("Which property would you like to sell?");
             Property selected = UserInterface.ChooseFromList(Property.FilterProperties(loggedInUser, properties));
-            if(selected != null)
+            if (selected != null)
             {
                 selected.TransferToHighestBidder();
-            }           
+            }
         }
 
         private void Logout()
