@@ -8,7 +8,7 @@ namespace CAB201_Assignment
     // Password class handles all hashing and 
     class Password
     {
-        private const int ITERATIONS = 10000;
+        private const int ITERATIONS = 1000;
         private const int LENGTH = 32;
 
         private byte[] salt;
@@ -27,7 +27,7 @@ namespace CAB201_Assignment
         public bool checkPassword(string userInput)
         {
             Rfc2898DeriveBytes PBKDF2 = new Rfc2898DeriveBytes(userInput, salt, ITERATIONS);    //Hash the password with the users salt
-            byte[] hashedInput = PBKDF2.GetBytes(LENGTH);                                       //Returns a hash - same length as hash returned in generateHash           
+            byte[] hashedInput = PBKDF2.GetBytes(LENGTH);                                       //Returns a hash - same length as hash returned in constructor           
             bool matching = hashEquals(hashedInput);                                            //Compares the password given with the given salt and hash
             return matching;
         }
@@ -38,10 +38,12 @@ namespace CAB201_Assignment
             int length = pwd_hash.Length;
             if (length != hash.Length)
             {
+                // if the array lengths aren't equal, the arrays aren't equal
                 return false;
             }
             for (int i = 0; i < length; i++)
             {
+                // iterate through each corresponding elements of the arrays and test for equality
                 if (pwd_hash[i] != hash[i]) return false;
             }
             return true;

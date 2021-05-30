@@ -10,13 +10,13 @@ namespace CAB201_Assignment
         private Menu functionMenu;
         private List<Customer> customers;
         private List<Property> properties;
-        private Customer LoggedInUser;
+        private Customer loggedInUser;
         // LoggedIn property tells whether there is a customer currently using the system
         private bool LoggedIn
         {
             get
             {
-                return (LoggedInUser != null);
+                return (loggedInUser != null);
             }
         }
 
@@ -119,35 +119,38 @@ namespace CAB201_Assignment
             }
             else
             {
-                //if the customer does exist, let the customer authenticate themselves. Will error and return null if password/email combination is incorrect 
-                LoggedInUser = customer.Authenticate(emailInp, pwdInp);
+                //abstract logic of authentication - will return null if incorrect details 
+                loggedInUser = customer.Authenticate(emailInp, pwdInp);
             }
         }
 
         private void Exit() { System.Environment.Exit(0); }
         // -- Actions for user logged in menu
-        private void NewLand() { properties.Add(LoggedInUser.ListNewProperty(1)); }
-        private void NewHouse() { properties.Add(LoggedInUser.ListNewProperty(2)); }
+        private void NewLand() { properties.Add(loggedInUser.ListNewProperty(1)); }
+        private void NewHouse() { properties.Add(loggedInUser.ListNewProperty(2)); }
+        private void SearchProperties()
+        {
 
-
+            int postcode = UserInterface.GetInteger("Enter postcode for search");
+            UserInterface.DisplayList($"All properties in postcode {postcode}", PropertiesInPostcode(postcode), "No properties are for sale in your chosen postcode");
+        }
         private void ListUsersProperties()
         {
-            List<Property> filtered_listings = Property.FilterProperties(LoggedInUser, properties);
+            List<Property> filtered_listings = Property.FilterProperties(loggedInUser, properties);
             UserInterface.DisplayList("All of your properties", filtered_listings, "You do not currently have any properties listed");
         }
 
-        private void SearchProperties()
+        private List<Property> PropertiesInPostcode(int postcode)
         {
-            string postcode = UserInterface.GetInput("Enter postcode for search");
             List<Property> filtered_listings = Property.FilterProperties(postcode, properties);
-            UserInterface.DisplayList($"All properties in postcode {postcode}", filtered_listings, "No properties are for sale in your chosen postcode");
+            return filtered_listings;
         }
         private void PlaceBid()
         {
             UserInterface.Message("Select a property to bid on");
             // We don't need to show the customer their own properties to bid on.
             // filteredproperties is evaluated by taking all properties except ones belonging to customer, then parsing it back as a list of properties
-            List<Property> filteredProperties = properties.Except(Property.FilterProperties(LoggedInUser, properties)).ToList();
+            List<Property> filteredProperties = properties.Except(Property.FilterProperties(loggedInUser, properties)).ToList();
             if (filteredProperties.Count == 0)
             {
                 UserInterface.Error("No properties available to bid on");
@@ -155,29 +158,29 @@ namespace CAB201_Assignment
             }
             Property selected = UserInterface.ChooseFromList(filteredProperties);
             // tell the customer to place a bid, then display the output to the screen
-            UserInterface.Message(LoggedInUser.PlaceBid(selected));
+            UserInterface.Message(loggedInUser.PlaceBid(selected));
         }
 
         private void ListBidsForProperty()
         {
-            Property selected = UserInterface.ChooseFromList(Property.FilterProperties(LoggedInUser, properties));
+            Property selected = UserInterface.ChooseFromList(Property.FilterProperties(loggedInUser, properties));
             selected.ListBids();
         }
 
         private void SellProperty()
         {
-            // Realestate company enquires about which property the customer wishes to sell, then tells the customer object to sell the selected property
+            // Realestate company enquires about which property the customer wishes to sell, then the property transfers its ownership 
             UserInterface.Message("Which property would you like to sell?");
-            Property selected = UserInterface.ChooseFromList(Property.FilterProperties(LoggedInUser, properties));
+            Property selected = UserInterface.ChooseFromList(Property.FilterProperties(loggedInUser, properties));
             if(selected != null)
             {
-                LoggedInUser.SellProperty(selected);
+                selected.TransferToHighestBidder();
             }           
         }
 
         private void Logout()
         {
-            LoggedInUser = null;
+            loggedInUser = null;
         }
     }
 }

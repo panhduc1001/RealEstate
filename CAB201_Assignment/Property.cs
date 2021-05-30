@@ -8,16 +8,15 @@ namespace CAB201_Assignment
     {
         // Fields and Properties
         protected Customer owner;
-        public Customer Owner { get { return owner; } }
         protected string address;
-        protected string Postcode;
+        protected int postcode;
         protected List<Bid> Bids { get; set; }
         // Methods
-        public Property(Customer owner, string address, string postcode)
+        public Property(Customer owner, string address, int postcode)
         {
             this.owner = owner;
             this.address = address;
-            this.Postcode = postcode;
+            this.postcode = postcode;
             Bids = new List<Bid>();
         }
         public static List<Property> FilterProperties(Customer owner, List<Property> properties)     // overloaded method with parameter customer
@@ -30,13 +29,13 @@ namespace CAB201_Assignment
             }
             return _properties;
         }
-        public static List<Property> FilterProperties(string postcode, List<Property> properties)    // overloaded method with parameter postcode string
+        public static List<Property> FilterProperties(int postcode, List<Property> properties)    // overloaded method with parameter postcode string
         {
             List<Property> _properties = new List<Property>();
 
             foreach (Property prop in properties)
             {
-                if (prop.Postcode == postcode) _properties.Add(prop);
+                if (prop.postcode == postcode) _properties.Add(prop);
             }
             return _properties;
         }
@@ -64,22 +63,30 @@ namespace CAB201_Assignment
 
         public void TransferToHighestBidder()
         {
-            Bid highestBid = Bids.Find(x => x.BidAmount == GetHighestBidAmount());
+            int salePrice = GetHighestBidAmount();
+            // if the highest bid ammount is 0, there aren't any bids so can't sell the property
+            if (salePrice == 0)
+            {
+                UserInterface.Error("There are no bids for this property at the current time");
+                return;
+            }
+            //there must be bids now, so transfer the property
+            Bid highestBid = Bids.Find(x => x.BidAmount == salePrice); 
             Customer newOwner = highestBid.Bidder;
             owner = newOwner;
             // bids can now be reset, the property has been transfered
             Bids = new List<Bid>();
+            UserInterface.Message($"Successfully sold {this} to {this.owner}");
+            UserInterface.Message($"Applicable sales tax: ${this.SalesTax(salePrice)}");
         }
-
     }
 
     class Land : Property
     {
-        public int Size { get; set; }
-
-        public Land(Customer owner, string address, string postcode, int size) : base(owner, address, postcode)
+        private int size;
+        public Land(Customer owner, string address, int postcode, int size) : base(owner, address, postcode)
         {
-            this.Size = size;
+            this.size = size;
         }
 
         public override void ListBids()
@@ -89,22 +96,21 @@ namespace CAB201_Assignment
 
         public override string ToString()
         {
-            return $"{address}, {Postcode}, Land: {Size} square metres";
+            return $"{address}, {postcode}, Land: {size} square metres";
         }
 
         public override int SalesTax(int salePrice)
         {
             // sales tax is equal to $5.50 per square metre, rounded to nearest whole dollar amount
-            return (int)Math.Round(Size * 5.5);
+            return (int)Math.Round(size * 5.5);
 
         }
     }
 
     class House : Property
     {
-        public string description { get; set; }
-
-        public House(Customer owner, string address, string postcode, string description) : base(owner, address, postcode)
+        private string description; 
+        public House(Customer owner, string address, int postcode, string description) : base(owner, address, postcode)
         {
             this.description = description;
         }
@@ -114,7 +120,7 @@ namespace CAB201_Assignment
         }
         public override string ToString()
         {
-            return $"{address}, {Postcode}, House: {description}";
+            return $"{address}, {postcode}, House: {description}";
         }
 
         public override int SalesTax(int salePrice)
